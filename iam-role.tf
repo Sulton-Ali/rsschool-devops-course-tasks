@@ -32,5 +32,4 @@ resource "aws_iam_role_policy_attachment" "policies" {
   ])
   role       = aws_iam_role.github_actions.name
   policy_arn = "arn:aws:iam::aws:policy/${each.key}"
-
 }
