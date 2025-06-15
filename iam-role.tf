@@ -1,4 +1,5 @@
-data "aws_iam_policy_document" "assume_iodc" {
+
+data "aws_iam_policy_document" "github_actions_assume" {
   statement {
     effect = "Allow"
     principals {
@@ -16,7 +17,7 @@ data "aws_iam_policy_document" "assume_iodc" {
 
 resource "aws_iam_role" "github_actions" {
   name               = "GithubActionsRole"
-  assume_role_policy = data.aws_iam_policy_document.assume_iodc.json
+  assume_role_policy = data.aws_iam_policy_document.github_actions_assume.json
 }
 
 resource "aws_iam_role_policy_attachment" "policies" {
