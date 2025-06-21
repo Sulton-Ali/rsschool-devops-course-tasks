@@ -21,20 +21,31 @@ Task details: [Task 1 - Basic Configuration](https://github.com/rolling-scopes-s
 ## Usage
 
 1. **Clone the repository:**
+
    ```bash
+
    git clone <repo-url>
    cd rsschool-devops-course-tasks
    ```
+
 2. **Initialize Terraform:**
+
    ```bash
+
    terraform init
    ```
+
 3. **Review the execution plan:**
+
    ```bash
+
    terraform plan
    ```
+
 4. **Apply the configuration:**
+
    ```bash
+
    terraform apply
    ```
 
