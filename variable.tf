@@ -43,7 +43,7 @@ variable "key_pair_name" {
 variable "my_public_ip_cidr" {
   description = "Your public IP address in CIDR notation for SSH access"
   type        = string
-  default     = "0.0.0.0/32"
+  default     = "213.230.72.135/32"
 }
 
 variable "github_actions_role_name" {
