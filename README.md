@@ -164,3 +164,55 @@ A screenshot of the AWS VPC Resource Map will be provided in the Pull Request de
 
 [If you implement GHA, describe it here. Example:
 A GitHub Actions workflow is configured to automatically run `terraform validate` and `terraform plan` on every pull request to ensure code quality and show planned changes.]
+
+# Task 3: Kubernetes (k3s) Cluster on AWS with Bastion Host
+
+## Overview
+
+This configuration extends your AWS infrastructure to deploy a lightweight Kubernetes (k3s) cluster using Terraform. It provisions two EC2 instances as k3s nodes (1 master, 1 agent) in private subnets, and a bastion host in a public subnet for secure access and cluster management.
+
+## Resources Created
+
+- Bastion host (public subnet, SSH access from your IP)
+- 2 EC2 instances for k3s (private subnet, SSH access from bastion)
+- Security groups for bastion and k3s nodes
+- User data scripts to install and configure k3s
+
+## Usage
+
+1. **Update variables** in `variable.tf` as needed (e.g., key pair, AMI, your public IP).
+2. **Apply Terraform:**
+   ```bash
+   terraform init
+   terraform apply
+   ```
+3. **SSH to Bastion Host:**
+   ```bash
+   ssh -i /path/to/your/key.pem ec2-user@<bastion_public_ip>
+   ```
+4. **From Bastion, SSH to k3s master node:**
+   ```bash
+   ssh -i /path/to/your/key.pem ec2-user@<k3s_master_private_ip>
+   ```
+5. **Verify cluster:**
+   ```bash
+   sudo kubectl get nodes
+   ```
+6. **Deploy workload:**
+   ```bash
+   sudo kubectl apply -f https://k8s.io/examples/pods/simple-pod.yaml
+   ```
+
+## Outputs
+
+- Bastion public IP
+- k3s master and agent private IPs
+
+## Notes
+
+- For local `kubectl` access, copy `/etc/rancher/k3s/k3s.yaml` from the master node and update the server IP to the bastion's public IP (with SSH tunnel), or expose the API securely.
+- See the main README for VPC/subnet/SG details.
+
+---
+
+Terraform code for this setup is in `k3s_cluster.tf`.
