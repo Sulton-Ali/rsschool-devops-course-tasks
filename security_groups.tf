@@ -12,6 +12,13 @@ resource "aws_security_group" "bastion_sg" {
     cidr_blocks = [var.my_public_ip_cidr]
   }
 
+  ingress {
+    from_port   = 6443
+    to_port     = 6443
+    protocol    = "tcp"
+    cidr_blocks = [var.my_public_ip_cidr]
+  }
+
   egress {
     description = "Allow all outbound traffic"
     from_port   = 0
