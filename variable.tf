@@ -34,6 +34,12 @@ variable "instance_type" {
   default     = "t2.micro"
 }
 
+variable "instance_type_k3s" {
+  description = "Instance type for the k3s nodes."
+  type        = string
+  default     = "t2.small"
+}
+
 variable "key_pair_name" {
   description = "Name of the SSH key pair to use for EC2 instances"
   type        = string
@@ -43,7 +49,7 @@ variable "key_pair_name" {
 variable "my_public_ip_cidr" {
   description = "Your public IP address in CIDR notation for SSH access"
   type        = string
-  default     = "213.230.72.135/32"
+  default     = "213.230.74.123/32"
 }
 
 variable "github_actions_role_name" {
